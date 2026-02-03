@@ -159,6 +159,7 @@ return {
         require('mason').setup({})
         require('mason-lspconfig').setup({
             ensure_installed = {
+                'stylua',
                 'rust_analyzer',
                 'ts_ls',
                 'eslint',
