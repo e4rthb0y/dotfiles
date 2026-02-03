@@ -205,19 +205,19 @@ return {
                 eslint = function()
                     require('lspconfig').eslint.setup({
                         on_attach = function(client, bufnr)
-                            vim.api.nvim_create_autocmd("BufWritePre", {
+                            vim.api.nvim_create_autocmd('BufWritePre', {
                                 buffer = bufnr,
-                                command = "EslintFixAll",
+                                command = 'EslintFixAll',
                             })
-                        end
+                        end,
                     })
                 end,
                 limminx = function()
-                    require("lspconfig").lemminx.setup({
+                    require('lspconfig').lemminx.setup({
                         settings = {
                             xml = {
                                 server = {
-                                    workDir = "~/.cache/lemminx",
+                                    workDir = '~/.cache/lemminx',
                                 },
                                 format = {
                                     enabled = true,
@@ -228,7 +228,7 @@ return {
                             },
                         },
                     })
-                end
+                end,
             },
         })
 
@@ -284,7 +284,7 @@ return {
             sources = {
                 { name = 'nvim_lsp' },
                 { name = 'luasnip', keyword_length = 2 },
-                { name = 'buffer',  keyword_length = 3 },
+                { name = 'buffer', keyword_length = 3 },
                 { name = 'path' },
             },
             mapping = cmp.mapping.preset.insert({
