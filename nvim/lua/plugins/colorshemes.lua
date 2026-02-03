@@ -1,0 +1,47 @@
+return {
+    {
+        'ptdewey/monalisa-nvim',
+        priority = 1000,
+    },
+    {
+        'AlexvZyl/nordic.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require('nordic').load()
+        end,
+    },
+    {
+        'bluz71/vim-nightfly-colors',
+        name = 'nightfly',
+        lazy = false,
+        priority = 1000,
+    },
+    {
+        'kimjbaran/voyager.nvim',
+        lazy = false,
+    },
+    { 'rose-pine/neovim', as = 'rose-pine' },
+    'Aryansh-S/fastdark.vim',
+    'Avimitin/neovim-deus',
+    'EdenEast/nightfox.nvim',
+    'Everblush/nvim',
+    'Mofiqul/adwaita.nvim',
+    'folke/tokyonight.nvim',
+    'lewpoly/sherbet.nvim',
+    'luisiacc/gruvbox-baby',
+    'nvimdev/zephyr-nvim',
+    'nyoom-engineering/oxocarbon.nvim',
+    'olimorris/onedarkpro.nvim',
+    'olivercederborg/poimandres.nvim',
+    'rebelot/kanagawa.nvim',
+    'sainnhe/edge',
+    'sainnhe/everforest',
+    'sainnhe/gruvbox-material',
+    'sainnhe/sonokai',
+    'tiagovla/tokyodark.nvim',
+    'xero/miasma.nvim',
+    'yazeed1s/minimal.nvim',
+    'yazeed1s/oh-lucy.nvim',
+    'zanglg/nova.nvim',
+}

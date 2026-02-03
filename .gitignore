@@ -1,0 +1,9 @@
+# Ignore bulky tmux plugins if they ever end up in this folder
+tmux/plugins/*
+
+# Exception: Always track the TPM manager itself if it's here
+!tmux/plugins/tpm
+
+# Ignore system files
+.DS_Store
+*.swp

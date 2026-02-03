@@ -1,0 +1,6 @@
+require('config.providers')
+require('config.base')
+require('config.maps')
+require('config.windows')
+require('config.commands')
+require('lazy_bootstrap')
