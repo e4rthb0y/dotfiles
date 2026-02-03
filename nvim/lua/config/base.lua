@@ -35,6 +35,7 @@ vim.opt.ruler           = true
 vim.opt.scrolloff       = 10
 vim.opt.title           = true
 vim.opt.wrap            = true
+vim.opt.clipboard       = "unnamedplus"
 
 -- Indentation
 vim.opt.autoindent      = true
