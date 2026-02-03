@@ -31,6 +31,7 @@ link_file "$DOTFILES_DIR/tmux.conf" "$HOME/.tmux.conf"
 # Detect if using Bash or Zsh and link accordingly
 if [ -f "$DOTFILES_DIR/bashrc" ]; then
     link_file "$DOTFILES_DIR/bashrc" "$HOME/.bashrc"
+    link_file "$DOTFILES_DIR/bash_aliases" "$HOME/.bash_aliases"
     source ~/.bashrc
 fi
 
