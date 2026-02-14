@@ -1,4 +1,13 @@
 return {
+    'maxmx03/solarized.nvim',
+    { 'catppuccin/nvim', name = 'catppuccin' },
+    {
+        'e-ink-colorscheme/e-ink.nvim',
+        config = function()
+            require('e-ink').setup()
+        end,
+    },
+    'oskarnurm/koda.nvim',
     {
         'ptdewey/monalisa-nvim',
         priority = 1000,

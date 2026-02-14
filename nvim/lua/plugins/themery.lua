@@ -6,9 +6,45 @@ local setup = function()
             before = [[ require('lualine').setup({ options = { theme = 'auto' } }) ]],
         },
         {
+            name = 'catppuccin ----------------------------- frappe',
+            colorscheme = 'catppuccin-frappe',
+            before = [[ require('lualine').setup({ options = { theme = 'catppuccin' } }) ]],
+        },
+        {
+            name = 'catppuccin ----------------------------- latte',
+            colorscheme = 'catppuccin-latte',
+            before = [[ require('lualine').setup({ options = { theme = 'catppuccin' } }) ]],
+        },
+        {
+            name = 'catppuccin ----------------------------- macchiato',
+            colorscheme = 'catppuccin-macchiato',
+            before = [[ require('lualine').setup({ options = { theme = 'catppuccin' } }) ]],
+        },
+        {
+            name = 'catppuccin ----------------------------- mocha',
+            colorscheme = 'catppuccin-mocha',
+            before = [[ require('lualine').setup({ options = { theme = 'catppuccin' } }) ]],
+        },
+        {
             name = 'edge',
             colorscheme = 'edge',
             before = [[ require('lualine').setup({ options = { theme = 'auto' } }) ]],
+        },
+        {
+            name = 'e-ink ---------------------------------- light',
+            colorscheme = 'e-ink',
+            before = [[
+                require('lualine').setup({ options = { theme = 'auto' } })
+                vim.opt.background = 'light'
+            ]],
+        },
+        {
+            name = 'e-ink ---------------------------------- dark',
+            colorscheme = 'e-ink',
+            before = [[
+                require('lualine').setup({ options = { theme = 'auto' } })
+                vim.opt.background = 'dark'
+            ]],
         },
         {
             name = 'everblush',
@@ -89,6 +125,22 @@ local setup = function()
             before = [[ require('lualine').setup({ options = { theme = 'auto' } }) ]],
         },
         {
+            name = 'koda ----------------------------------- light',
+            colorscheme = 'koda',
+            before = [[
+                require('lualine').setup({ options = { theme = 'auto' } })
+                vim.opt.background = 'light'
+            ]],
+        },
+        {
+            name = 'koda ----------------------------------- dark',
+            colorscheme = 'koda',
+            before = [[
+                require('lualine').setup({ options = { theme = 'auto' } })
+                vim.opt.background = 'dark'
+            ]],
+        },
+        {
             name = 'miasma',
             colorscheme = 'miasma',
             before = [[ require('lualine').setup({ options = { theme = 'auto' } }) ]],
@@ -152,6 +204,22 @@ local setup = function()
             name = 'sherbet',
             colorscheme = 'sherbet',
             before = [[ require('lualine').setup({ options = { theme = 'auto' } }) ]],
+        },
+        {
+            name = 'solarized dark',
+            colorscheme = 'solarized',
+            before = [[ 
+                require('lualine').setup({ options = { theme = 'solarized_dark' } })
+                vim.opt.background = 'dark'
+            ]],
+        },
+        {
+            name = 'solarized light',
+            colorscheme = 'solarized',
+            before = [[ 
+                require('lualine').setup({ options = { theme = 'solarized_light' } })
+                vim.opt.background = 'light'
+            ]],
         },
         {
             name = 'sonokai',
