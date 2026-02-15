@@ -30,7 +30,13 @@ return {
         'kimjbaran/voyager.nvim',
         lazy = false,
     },
-    { 'rose-pine/neovim', as = 'rose-pine' },
+    {
+        'rose-pine/neovim',
+        as = 'rose-pine',
+        config = function()
+            require('rose-pine').setup({ styles = { italic = false } })
+        end,
+    },
     'Aryansh-S/fastdark.vim',
     'Avimitin/neovim-deus',
     'EdenEast/nightfox.nvim',
