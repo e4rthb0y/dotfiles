@@ -1,4 +1,5 @@
 return {
+    'clpi/cyu.lua',
     'maxmx03/solarized.nvim',
     { 'catppuccin/nvim', name = 'catppuccin' },
     {
