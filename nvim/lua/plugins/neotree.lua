@@ -26,16 +26,17 @@ local setup = function()
             git_status = {
                 symbols = {
                     -- Change type
-                    added = ' ',
-                    modified = ' ',
-                    deleted = '✖ ',
-                    renamed = ' ',
+                    added = '󰐕',
+                    modified = '󰏫',
+                    deleted = '󰍶',
+                    renamed = '󰁯',
+
                     -- Status type
-                    untracked = ' ',
-                    ignored = ' ',
-                    unstaged = '☐ ',
-                    staged = '☑ ',
-                    conflict = '☒ ',
+                    untracked = '󰇘',
+                    ignored = '',
+                    unstaged = '󰄱',
+                    staged = '󰱒',
+                    conflict = '',
                 },
             },
 
