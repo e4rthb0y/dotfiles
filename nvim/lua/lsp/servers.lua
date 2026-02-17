@@ -1,0 +1,18 @@
+return {
+    'jdtls',
+    'stylua',
+    'rust_analyzer',
+    'ts_ls',
+    'eslint',
+    'lua_ls',
+    'jsonls',
+    'html',
+    'pylsp',
+    'dockerls',
+    'bashls',
+    'marksman',
+    'nginx_language_server',
+    'lemminx',
+    'netcoredbg',
+    'csharpier',
+}

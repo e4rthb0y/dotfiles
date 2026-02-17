@@ -1,0 +1,15 @@
+return {
+    'stylua',
+    'prettierd',
+    'prettier',
+    'google-java-format --aosp',
+    'black',
+    'csharpier',
+    'beautysh',
+    'shellcheck',
+    'yamlfix',
+    'taplo',
+    'htmlbeautifier',
+    'buf',
+    'rustfmt',
+}
