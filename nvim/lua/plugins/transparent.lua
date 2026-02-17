@@ -1,11 +1,26 @@
 return {
     'xiyaowong/transparent.nvim',
-    config = function ()
+    config = function()
         require('transparent').setup({
             extra_groups = {
-                "NormalFloat",
-                "NvimTreeNormal"
-            }
+                'NeoTreeNormal',
+                'NeoTreeNormalNC',
+                'NeoTreeFloatNormal',
+                'NeoTreeFloatTitle',
+                'TelescopeNormal',
+                'TelescopeBorder',
+                'TelescopePromptNormal',
+                'TelescopePromptBorder',
+                'TelescopeResultsNormal',
+                'TelescopeResultsBorder',
+                'TelescopePreviewNormal',
+                'TelescopePreviewBorder',
+                'FloatBorder',
+                'NormalFloat',
+            },
+            exclude_groups = {
+                'Pmenu',
+            },
         })
-    end
+    end,
 }
