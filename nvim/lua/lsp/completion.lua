@@ -83,7 +83,7 @@ function M.setup()
             end, { 'i', 's' }),
         }),
         formatting = {
-            fields = { 'icon', 'kind', 'abbr', 'menu' },
+            fields = { 'kind', 'abbr', 'menu' },
             format = lspkind.cmp_format({
                 maxwidth = {
                     menu = function()
