@@ -23,8 +23,16 @@ function M.setup()
 
     cmp.setup({
         window = {
-            completion = cmp.config.window.bordered(),
-            documentation = cmp.config.window.bordered(),
+            completion = {
+                border = 'none',
+                winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None',
+                col_offset = -3,
+                side_padding = 0,
+            },
+            documentation = {
+                border = 'none',
+                winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
+            },
         },
         snippet = {
             expand = function(args)
@@ -97,6 +105,7 @@ function M.setup()
                 ellipsis_char = '...',
                 show_labelDetails = true,
                 before = function(entry, vim_item)
+                    vim_item.kind = string.format(' %s  ', vim_item.kind)
                     vim_item.menu = ({
                         nvim_lsp = '[LSP]',
                         luasnip = '[Snip]',
