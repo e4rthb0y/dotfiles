@@ -2,14 +2,16 @@ local M = {}
 
 function M.setup()
     vim.diagnostic.config({
-        virtual_text = false,
+        virtual_text = {
+            prefix = '●',
+            spacing = 4,
+        },
         update_in_insert = false,
         underline = true,
         severity_sort = true,
         float = {
             focusable = false,
-            style = 'minimal',
-            border = 'rounded',
+            border = 'none',
             source = 'always',
             header = '',
             prefix = '',
@@ -20,14 +22,12 @@ function M.setup()
     function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
         opts = opts or {}
         opts.border = opts.border or 'rounded'
-        return orig_util_open_floating_preview(contents, syntax, opts, ...)
-    end
 
-    vim.api.nvim_create_autocmd('CursorHold', {
-        callback = function()
-            vim.diagnostic.open_float(nil, { focusable = false })
-        end,
-    })
+        local bufnr, winnr =
+            orig_util_open_floating_preview(contents, syntax, opts, ...)
+
+        return bufnr, winnr
+    end
 end
 
 return M
