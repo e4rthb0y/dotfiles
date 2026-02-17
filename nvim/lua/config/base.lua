@@ -14,10 +14,10 @@ vim.opt.foldexpr        = "nvim_treesitter#foldexpr()"
 -- Look & Feel
 vim.opt.background      = 'dark'
 vim.opt.cursorline      = true
-vim.opt.pumblend        = 15
+vim.opt.pumblend        = 0
 vim.opt.termguicolors   = true
 vim.opt.wildoptions     = 'pum'
-vim.opt.winblend        = 15
+vim.opt.winblend        = 0
 
 -- Encoding
 vim.scriptencoding      = 'utf-8'
