@@ -95,6 +95,16 @@ function M.setup()
                 },
                 ellipsis_char = '...',
                 show_labelDetails = true,
+                before = function(entry, vim_item)
+                    vim_item.menu = ({
+                        nvim_lsp = '[LSP]',
+                        luasnip = '[Snip]',
+                        buffer = '[Buf]',
+                        path = '[Path]',
+                        cmdline = '[Cmd]',
+                    })[entry.source.name] or entry.source.name
+                    return vim_item
+                end,
             }),
         },
         completion = {
