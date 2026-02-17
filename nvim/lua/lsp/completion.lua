@@ -118,7 +118,7 @@ function M.setup()
             }),
         },
         completion = {
-            completeopt = 'menu,menuone,noinsert',
+            completeopt = 'menu,menuone',
         },
     })
 
