@@ -47,6 +47,7 @@ function M.setup()
                 copy_diagnostics()
             end,
 
+            -- Jump forward/backward in completion suggestions
             ['<Tab>'] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item()
