@@ -77,7 +77,7 @@ local setup = function()
 end
 
 local function config()
-    local neotree = require 'neo-tree'
+    local neotree = require('neo-tree')
 
     neotree.setup(setup())
 
@@ -113,14 +113,14 @@ local function config()
 
     -- stylua: ignore end
 
-    vim.cmd [[nnoremap / :Neotree toggle current reveal_force_cwd<cr>]]
-    vim.cmd [[nnoremap \| :Neotree focus filesystem float reveal toggle<cr>]]
-    vim.cmd [[nnoremap <leader>b :Neotree toggle show buffers right<cr>]]
-    vim.cmd [[nnoremap gs :Neotree float git_status<cr>]]
+    vim.cmd([[nnoremap / :Neotree toggle current reveal_force_cwd<cr>]])
+    vim.cmd([[nnoremap \| :Neotree focus filesystem float reveal toggle<cr>]])
+    vim.cmd([[nnoremap <leader>b :Neotree toggle show buffers right<cr>]])
+    vim.cmd([[nnoremap gs :Neotree float git_status<cr>]])
 end
 
 local window_picker_setup = function()
-    return require('window-picker').setup {
+    return require('window-picker').setup({
         filter_rules = {
             include_current_win = false,
             autoselect_one = true,
@@ -132,7 +132,7 @@ local window_picker_setup = function()
                 buftype = { 'terminal', 'quickfix' },
             },
         },
-    }
+    })
 end
 
 return {
@@ -145,8 +145,8 @@ return {
         {
             's1n7ax/nvim-window-picker',
             version = '2.*',
-            init = window_picker_setup
+            init = window_picker_setup,
         },
     },
-    config = config
+    config = config,
 }
