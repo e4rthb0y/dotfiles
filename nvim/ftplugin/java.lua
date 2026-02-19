@@ -1,17 +1,15 @@
-local status, jdtls = pcall(require, 'jdtls')
-if not status then
+local jdtls_status, jdtls = pcall(require, 'jdtls')
+if not jdtls_status then
     return
 end
 
--- Helper to find Mason paths
 local function get_mason_path()
     return vim.fn.stdpath('data') .. '/mason/packages/jdtls'
 end
 
 local mason_path = get_mason_path()
-local launcher_jar =
-    vim.fn.glob(mason_path .. '/plugins/org.eclipse.equinox.launcher_*.jar')
-local lombok_jar = mason_path .. '/lombok.jar'
+local launcher_jar = vim.fn.glob(mason_path .. '/plugins/org.eclipse.equinox.launcher_*.jar', true, true)[1]
+local lombok_path = mason_path .. '/lombok.jar'
 local config_dir = mason_path .. '/config_linux'
 
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
@@ -31,7 +29,7 @@ local config = {
         'java.base/java.util=ALL-UNNAMED',
         '--add-opens',
         'java.base/java.lang=ALL-UNNAMED',
-        '-javaagent:' .. lombok_jar,
+        '-javaagent:' .. lombok_path,
         '-jar',
         launcher_jar,
         '-configuration',
