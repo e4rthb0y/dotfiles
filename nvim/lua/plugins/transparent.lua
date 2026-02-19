@@ -17,6 +17,8 @@ return {
                 'TelescopePreviewBorder',
                 'FloatBorder',
                 'NormalFloat',
+                'NotifyBackground',
+                'NotifyBorder',
             },
             exclude_groups = {
                 'Pmenu',
