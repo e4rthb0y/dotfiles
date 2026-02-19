@@ -1,9 +1,11 @@
 local function set_lspconfig()
-    local lspconfig = require('lspconfig')
     local cmp_nvim_lsp = require('cmp_nvim_lsp')
+    local mason_registry = require('mason-registry')
+    local mason_lspconfig = require('mason-lspconfig')
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
     local servers = require('lsp.servers')
+    local formatters = require('lsp.formatters')
 
     local function lsp_server_handler(server_name)
         local has_custom_opts, server_opts =
@@ -17,19 +19,25 @@ local function set_lspconfig()
             opts = vim.tbl_deep_extend('force', opts, server_opts)
         end
 
-        lspconfig[server_name].setup(opts)
+        vim.lsp.config(server_name, opts)
     end
 
-    require('mason-lspconfig').setup({
-        ensure_installed = servers,
-        handlers = {
-            lsp_server_handler,
-            ['jdtls'] = function() end,
-            ['roslyn'] = function() end,
-        },
+    mason_lspconfig.setup({
+        ensure_installed = servers.to_install(),
     })
-end
 
+    -- Install additional tools (formatters, etc)
+    for _, tool in ipairs(formatters.to_install()) do
+        local p = mason_registry.get_package(tool)
+        if not p:is_installed() then
+            p:install()
+        end
+    end
+
+    for _, name in ipairs(servers.to_setup()) do
+        lsp_server_handler(name)
+    end
+end
 local function set_keymaps()
     vim.api.nvim_create_autocmd('LspAttach', {
         desc = 'LSP actions',
@@ -103,6 +111,8 @@ return {
         'seblyng/roslyn.nvim', -- C# engine
     },
     config = function()
+        vim.lsp.set_log_level('debug')
+        vim.lsp.log_path = vim.fn.stdpath('state') .. '/lsp.log'
         set_lspconfig()
         set_keymaps()
 
