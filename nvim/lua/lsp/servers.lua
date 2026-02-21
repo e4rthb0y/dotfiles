@@ -2,7 +2,6 @@ local M = {}
 
 local raw_servers = {
     { name = 'jdtls', auto_setup = false },
-    { name = 'roslyn', auto_setup = false },
     'rust_analyzer',
     'ts_ls',
     'eslint',
@@ -15,8 +14,6 @@ local raw_servers = {
     'marksman',
     'nginx_language_server',
     'lemminx',
-    'netcoredbg',
-    'csharpier',
     'yamlls',
 }
 
