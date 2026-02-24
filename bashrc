@@ -123,3 +123,4 @@ PATH="$VOLTA_HOME/bin:$PATH"
 # java: java development kit
 export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
 export PATH="$JAVA_HOME/bin:$PATH"
+. "$HOME/.cargo/env"

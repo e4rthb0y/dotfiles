@@ -47,6 +47,28 @@ mkdir -p "$HOME/.tmux/plugins"
 # Ensure ~/.config exists
 mkdir -p "$HOME/.config"
 
+
+# --- 4. Link Taskwarrior & Timewarrior ---
+# Create necessary directory structures
+mkdir -p "$HOME/.task/hooks"
+mkdir -p "$HOME/.timewarrior"
+
+# Link configuration files
+if [ -f "$DOTFILES_DIR/taskw/taskrc" ]; then
+    link_file "$DOTFILES_DIR/taskw/taskrc" "$HOME/.taskrc"
+fi
+
+if [ -f "$DOTFILES_DIR/timew/timewarrior.conf" ]; then
+    link_file "$DOTFILES_DIR/timew/timewarrior.conf" "$HOME/.timewarrior/timewarrior.conf"
+fi
+
+if [ -f "$DOTFILES_DIR/taskw/hooks/on-modify.timewarrior" ]; then
+    link_file "$DOTFILES_DIR/taskw/hooks/on-modify.timewarrior" "$HOME/.task/hooks/on-modify.timewarrior"
+
+    chmod +x "$HOME/.task/hooks/on-modify.timewarrior"
+    echo "Hook permissions set: ~/.task/hooks/on-modify.timewarrior is now executable."
+fi
+
 # Link the entire nvim directory
 link_file "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 

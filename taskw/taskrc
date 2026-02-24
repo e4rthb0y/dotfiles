@@ -1,0 +1,29 @@
+# --- General Settings ---
+data.location=~/.task
+confirmation=yes
+allow.empty.filter=yes
+indent.report=2
+
+# --- Syncing (Taskwarrior 3 Native) ---
+# sync.server.url=https://your-sync-server.com
+# sync.server.client_id=YOUR_RANDOM_UUID
+# sync.encryption_secret=your_strong_password
+
+# --- Contexts ---
+# 'read' defines what you see; 'write' defines the default project for new tasks
+context.studio.read=project:Studio
+context.studio.write=project:Studio
+context.dev.read=project:Dev
+context.dev.write=project:Dev
+
+# --- Timewarrior & Hooks ---
+# TW3 requires explicit hook enabling
+hooks.on=on
+hooks.location=~/.task/hooks
+
+# --- Taskwarrior 3 Performance & UI ---
+# Keeps IDs consistent until you manually run 'task sync' or 'task gc'
+gc=off
+editor=nvim
+regex=on
+news.version=3.4.2
