@@ -20,7 +20,9 @@ local raw_formatters = {
 function M.to_install()
     local list = {}
     for _, f in ipairs(raw_formatters) do
-        table.insert(list, type(f) == 'string' and f)
+        if type(f) == 'string' then
+            table.insert(list, f)
+        end
     end
     return list
 end
