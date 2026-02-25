@@ -5,12 +5,12 @@ import json
 
 def get_quadrant_tag(imp, exi):
     if imp == "High" and exi == "High":
-        return "FOUNDATION"
+        return "p1"
     if imp == "High" and exi == "Low":
-        return "ESSENTIAL"
+        return "p2"
     if imp == "Low" and exi == "High":
-        return "NOISE"
-    return "SHALLOWS"
+        return "p3"
+    return "p4"
 
 
 def hook():
@@ -20,7 +20,7 @@ def hook():
 
     task = json.loads(lines[-1])
 
-    quadrant_tags = {"FOUNDATION", "ESSENTIAL", "NOISE", "SHALLOWS"}
+    quadrant_tags = {"p1", "p2", "p3", "p4"}
 
     imp = task.get("importance", "Low")
     exi = task.get("exigency", "Low")

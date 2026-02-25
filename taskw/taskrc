@@ -56,10 +56,10 @@ uda.taskwarrior-id.type=string
 include ~/task-3.4.2/doc/rc/dark-gray-blue-256.theme
 
 # --- 2. Custom Color Rules SECOND (Overrides) ---
-color.tag.FOUNDATION=bold red
-color.tag.ESSENTIAL=bold green
-color.tag.NOISE=yellow
-color.tag.SHALLOWS=color8
+color.tag.p1=bold red
+color.tag.p2=bold green
+color.tag.p3=yellow
+color.tag.p4=color8
 
 # --- 6. QUADRANT REPORTS (The Matrix) -----------------------------------------
 
@@ -68,24 +68,24 @@ color.tag.SHALLOWS=color8
 report.next.columns=id,project,importance,exigency,description,tags,urgency
 report.next.labels=ID,Proj,Imp,Exig,Description,Tag,Urg
 
-# Q1: THE BEDROCK
-report.bedrock.description=Q1: The Foundation - The substructure that prevents chaos.
-report.bedrock.columns=id,project,importance,exigency,description
-report.bedrock.filter=status:pending importance:High exigency:High
-report.bedrock.sort=priority-,entry+
+# Q1: THE CRITIAL 
+report.foundation.description=P1: Critial - Non-negotiable structural requirements. If this fails, the system fails.
+report.foundation.columns=id,project,importance,exigency,description
+report.foundation.filter=status:pending importance:High exigency:High
+report.foundation.sort=priority-,entry+
 
-# Q2: DEEP WORK
-report.deepwork.description=Q2: Deep Work - Deep work where your "Art" actually happens.
-report.deepwork.columns=id,project,importance,exigency,description
-report.deepwork.filter=status:pending importance:High exigency:Low
-report.deepwork.sort=project+,entry+
+# Q2: THE ESSENTIAL
+report.essential.description=P2: Essential - Where the "Art" actually happens. High-value, creative work that requires focus.
+report.essential.columns=id,project,importance,exigency,description
+report.essential.filter=status:pending importance:High exigency:Low
+report.essential.sort=project+,entry+
 
 # Q3: THE NOISE
-report.noise.description=Q3: The Noise - Distractions that feel urgent but lack value.
+report.noise.description=P3: Noise - Distractions that feel urgent but lack value.
 report.noise.columns=id,project,importance,exigency,description
 report.noise.filter=status:pending importance:Low exigency:High
 
-# Q4: THE CAGE
-report.cage.description=Q4: The Shallows - Low-value, low-pressure tasks that can be deleted.
-report.cage.columns=id,project,importance,exigency,description
-report.cage.filter=status:pending importance:Low exigency:Low
+# Q4: THE TRIVIAL
+report.shallows.description=P4: Trivial - Low-value distractions that take up space.
+report.shallows.columns=id,project,importance,exigency,description
+report.shallows.filter=status:pending importance:Low exigency:Low
