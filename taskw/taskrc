@@ -1,0 +1,91 @@
+# ==============================================================================
+# TASKWARRIOR 3 CONFIGURATION:
+# "Discipline is the Frame. Spontaneity is the Art."
+# ==============================================================================
+
+# --- 1. CORE SETTINGS ---------------------------------------------------------
+
+data.location=~/.task
+editor=nvim
+color=on
+regex=on
+gc=off                          # Stable IDs: Essential for local workflows
+confirmation=yes
+allow.empty.filter=yes
+indent.report=2
+news.version=3.4.2
+
+# --- 2. THE NAVAL MATRIX (UDAs) ----------------------------------------------
+
+# Importance: The "Essential" (Discipline/Foundation)
+uda.importance.type=string
+uda.importance.label=Imp
+uda.importance.values=High,Low
+uda.importance.default=Low
+
+# Exigency: The "Pressing" (Time Pressure/Noise)
+uda.exigency.type=string
+uda.exigency.label=Exig
+uda.exigency.values=High,Low
+uda.exigency.default=Low
+
+# --- 3. URGENCY COEFFS (Gravity) ---------------------------------------------
+
+urgency.uda.importance.High.coefficient=10.0
+urgency.uda.exigency.High.coefficient=5.0
+urgency.user.tag.next.coefficient=15.0
+
+# --- 4. CONTEXTS --------------------------------------------------------------
+
+context.studio.read=project:Studio
+context.studio.write=project:Studio
+context.dev.read=project:Dev
+context.dev.write=project:Dev
+context.client.read=project:Client
+context.client.write=project:Client
+
+# --- 5. INTEGRATIONS (TIMEW & THEME) ------------------------------------------
+hooks.on=on
+hooks.location=~/.task/hooks
+
+# Required for Timewarrior to map back to specific Task IDs
+uda.taskwarrior-id.label=Taskwarrior ID
+uda.taskwarrior-id.type=string
+
+# Path to your colorscheme
+include ~/task-3.4.2/doc/rc/dark-gray-blue-256.theme
+
+# --- 2. Custom Color Rules SECOND (Overrides) ---
+color.tag.p1=bold red
+color.tag.p2=bold green
+color.tag.p3=yellow
+color.tag.p4=color8
+
+# --- 6. QUADRANT REPORTS (The Matrix) -----------------------------------------
+
+
+# DEFAULT VIEW
+report.next.columns=id,project,importance,exigency,description,tags,urgency
+report.next.labels=ID,Proj,Imp,Exig,Description,Tag,Urg
+
+# Q1: THE CRITIAL 
+report.p1.description=P1: Critial - Non-negotiable structural requirements. If this fails, the system fails.
+report.p1.columns=id,project,importance,exigency,description
+report.p1.filter=status:pending importance:High exigency:High
+report.p1.sort=priority-,entry+
+
+# Q2: THE ESSENTIAL
+report.p2.description=P2: Essential - Where the "Art" actually happens. High-value, creative work that requires focus.
+report.p2.columns=id,project,importance,exigency,description
+report.p2.filter=status:pending importance:High exigency:Low
+report.p2.sort=project+,entry+
+
+# Q3: THE NOISE
+report.p3.description=P3: Noise - Distractions that feel urgent but lack value.
+report.p3.columns=id,project,importance,exigency,description
+report.p3.filter=status:pending importance:Low exigency:High
+
+# Q4: THE TRIVIAL
+report.p4.description=P4: Trivial - Low-value distractions that take up space.
+report.p4.columns=id,project,importance,exigency,description
+report.p4.filter=status:pending importance:Low exigency:Low
