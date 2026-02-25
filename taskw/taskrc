@@ -57,7 +57,7 @@ include ~/task-3.4.2/doc/rc/dark-gray-blue-256.theme
 
 # --- 2. Custom Color Rules SECOND (Overrides) ---
 color.tag.p1=bold red
-color.tag.p2=bold green
+color.tag.p2=bold blue
 color.tag.p3=yellow
 color.tag.p4=color8
 
