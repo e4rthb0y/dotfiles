@@ -1,29 +1,89 @@
-# --- General Settings ---
+# ==============================================================================
+# TASKWARRIOR 3 CONFIGURATION:
+# "Discipline is the Frame. Spontaneity is the Art."
+# ==============================================================================
+
+# --- 1. CORE SETTINGS ---------------------------------------------------------
+
 data.location=~/.task
+editor=nvim
+color=on
+regex=on
+gc=off                          # Stable IDs: Essential for local workflows
 confirmation=yes
 allow.empty.filter=yes
 indent.report=2
+news.version=3.4.2
 
-# --- Syncing (Taskwarrior 3 Native) ---
-# sync.server.url=https://your-sync-server.com
-# sync.server.client_id=YOUR_RANDOM_UUID
-# sync.encryption_secret=your_strong_password
+# --- 2. THE NAVAL MATRIX (UDAs) ----------------------------------------------
 
-# --- Contexts ---
-# 'read' defines what you see; 'write' defines the default project for new tasks
+# Importance: The "Essential" (Discipline/Foundation)
+uda.importance.type=string
+uda.importance.label=Imp
+uda.importance.values=High,Low
+uda.importance.default=Low
+
+# Exigency: The "Pressing" (Time Pressure/Noise)
+uda.exigency.type=string
+uda.exigency.label=Exig
+uda.exigency.values=High,Low
+uda.exigency.default=Low
+
+# --- 3. URGENCY COEFFS (Gravity) ---------------------------------------------
+
+urgency.uda.importance.High.coefficient=10.0
+urgency.uda.exigency.High.coefficient=5.0
+urgency.user.tag.next.coefficient=15.0
+
+# --- 4. CONTEXTS --------------------------------------------------------------
+
 context.studio.read=project:Studio
 context.studio.write=project:Studio
 context.dev.read=project:Dev
 context.dev.write=project:Dev
+context.client.read=project:Client
+context.client.write=project:Client
 
-# --- Timewarrior & Hooks ---
-# TW3 requires explicit hook enabling
+# --- 5. INTEGRATIONS (TIMEW & THEME) ------------------------------------------
 hooks.on=on
 hooks.location=~/.task/hooks
 
-# --- Taskwarrior 3 Performance & UI ---
-# Keeps IDs consistent until you manually run 'task sync' or 'task gc'
-gc=off
-editor=nvim
-regex=on
-news.version=3.4.2
+# Required for Timewarrior to map back to specific Task IDs
+uda.taskwarrior-id.label=Taskwarrior ID
+uda.taskwarrior-id.type=string
+
+# Path to your colorscheme
+include ~/task-3.4.2/doc/rc/dark-gray-blue-256.theme
+
+# --- 6. QUADRANT REPORTS (The Matrix) -----------------------------------------
+
+
+# DEFAULT VIEW
+report.next.columns=id,project,importance,exigency,description,tags,urgency
+report.next.labels=ID,Proj,Imp,Exig,Description,Tag,Urg
+
+# Q1: THE BEDROCK
+report.bedrock.description=Q1: The Foundation - The substructure that prevents chaos.
+report.bedrock.columns=id,project,importance,exigency,description
+report.bedrock.filter=status:pending importance:High exigency:High
+report.bedrock.sort=priority-,entry+
+color.uda.importance.High.exigency.High=bold white on red
+
+# Q2: DEEP WORK
+report.deepwork.description=Q2: Deep Work - Deep work where your "Art" actually happens.
+report.deepwork.columns=id,project,importance,exigency,description
+report.deepwork.filter=status:pending importance:High exigency:Low
+report.deepwork.sort=project+,entry+
+color.uda.importance.High.exigency.Low=bold green
+
+# Q3: THE NOISE
+report.noise.description=Q3: The Noise - Distractions that feel urgent but lack value.
+report.noise.columns=id,project,importance,exigency,description
+report.noise.filter=status:pending importance:Low exigency:High
+color.uda.exigency.High.importance.Low=yellow
+
+# Q4: THE CAGE
+report.cage.description=Q4: The Shallows - Low-value, low-pressure tasks that can be deleted.
+report.cage.columns=id,project,importance,exigency,description
+report.cage.filter=status:pending importance:Low exigency:Low
+color.uda.importance.Low.exigency.Low=color8

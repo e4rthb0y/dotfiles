@@ -69,6 +69,21 @@ if [ -f "$DOTFILES_DIR/taskw/hooks/on-modify.timewarrior" ]; then
     echo "Hook permissions set: ~/.task/hooks/on-modify.timewarrior is now executable."
 fi
 
+VM_SRC="$DOTFILES_DIR/taskw/hooks/value_matrix.py"
+TASK_HOOKS_DIR="$HOME/.task/hooks"
+
+# 2. Make the source of truth executable
+if [ -f "$VM_SRC" ]; then
+    chmod +x "$VM_SRC"
+
+    ln -sf "$VM_SRC" "$TASK_HOOKS_DIR/on-add.value_matrix.py"
+    chmod +x "$HOME/.task/hooks/on-add.value_matrix.py"
+    ln -sf "$VM_SRC" "$TASK_HOOKS_DIR/on-modify.value_matrix.py"
+    chmod +x "$HOME/.task/hooks/on-modify.value_matrix.py"
+
+    echo "Value Matrix Hook is now executable."
+fi
+
 # Link the entire nvim directory
 link_file "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 
