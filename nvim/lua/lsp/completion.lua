@@ -19,7 +19,7 @@ function M.setup()
     local luasnip = require('luasnip')
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-    vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+    vim.opt.completeopt = { 'menu', 'menuone' }
 
     cmp.setup({
         window = {
@@ -123,14 +123,34 @@ function M.setup()
     })
 
     cmp.setup.cmdline('/', {
-        mapping = cmp.mapping.preset.cmdline(),
+        mapping = cmp.mapping.preset.cmdline({
+            ['<CR>'] = {
+                c = function(fallback)
+                    if cmp.visible() then
+                        cmp.confirm({ select = true })
+                    else
+                        fallback()
+                    end
+                end,
+            },
+        }),
         sources = {
             { name = 'buffer' },
         },
     })
 
     cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline(),
+        mapping = cmp.mapping.preset.cmdline({
+            ['<CR>'] = {
+                c = function(fallback)
+                    if cmp.visible() then
+                        cmp.confirm({ select = true })
+                    else
+                        fallback()
+                    end
+                end,
+            },
+        }),
         sources = cmp.config.sources({
             { name = 'path' },
         }, {
