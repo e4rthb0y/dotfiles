@@ -19,7 +19,7 @@ function M.setup()
     local luasnip = require('luasnip')
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-    vim.opt.completeopt = { 'menu', 'menuone' }
+    vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
     cmp.setup({
         window = {
@@ -49,7 +49,7 @@ function M.setup()
         mapping = cmp.mapping.preset.insert({
             ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
             ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-            ['<CR>'] = cmp.mapping.confirm({ select = true }),
+            ['<CR>'] = cmp.mapping.confirm({ select = false }),
             ['<C-Space>'] = cmp.mapping.complete(),
             ['<A-l>'] = function()
                 copy_diagnostics()
@@ -118,7 +118,7 @@ function M.setup()
             }),
         },
         completion = {
-            completeopt = 'menu,menuone',
+            completeopt = 'menu,menuone,noselect',
         },
     })
 
@@ -126,8 +126,8 @@ function M.setup()
         mapping = cmp.mapping.preset.cmdline({
             ['<CR>'] = {
                 c = function(fallback)
-                    if cmp.visible() then
-                        cmp.confirm({ select = true })
+                    if cmp.visible() and cmp.get_selected_entry() then
+                        cmp.confirm({ select = false })
                     else
                         fallback()
                     end
@@ -143,8 +143,8 @@ function M.setup()
         mapping = cmp.mapping.preset.cmdline({
             ['<CR>'] = {
                 c = function(fallback)
-                    if cmp.visible() then
-                        cmp.confirm({ select = true })
+                    if cmp.visible() and cmp.get_selected_entry() then
+                        cmp.confirm({ select = false })
                     else
                         fallback()
                     end
