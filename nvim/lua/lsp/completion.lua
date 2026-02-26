@@ -49,7 +49,7 @@ function M.setup()
         mapping = cmp.mapping.preset.insert({
             ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
             ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-            ['<CR>'] = cmp.mapping.confirm({ select = false }),
+            ['<CR>'] = cmp.mapping.confirm({ select = true }),
             ['<C-Space>'] = cmp.mapping.complete(),
             ['<A-l>'] = function()
                 copy_diagnostics()
@@ -58,7 +58,7 @@ function M.setup()
             -- Jump forward/backward in completion suggestions
             ['<Tab>'] = cmp.mapping(function(fallback)
                 if cmp.visible() then
-                    cmp.select_next_item()
+                    cmp.select_next_item(cmp_select)
                 elseif luasnip.expand_or_locally_jumpable() then
                     luasnip.expand_or_jump()
                 else
@@ -67,7 +67,7 @@ function M.setup()
             end, { 'i', 's' }),
             ['<S-Tab>'] = cmp.mapping(function(fallback)
                 if cmp.visible() then
-                    cmp.select_prev_item()
+                    cmp.select_prev_item(cmp_select)
                 elseif luasnip.locally_jumpable(-1) then
                     luasnip.jump(-1)
                 else
