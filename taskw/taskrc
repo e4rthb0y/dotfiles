@@ -43,6 +43,16 @@ context.dev.read=project:Dev
 context.dev.write=project:Dev
 context.client.read=project:Client
 context.client.write=project:Client
+context.kate.read=project:Client.Kate.Webflow
+context.kate.write=project:Client.Kate.Webflow
+context.daniel.read=project:Client.Daniel.Webflow
+context.daniel.write=project:Client.Daniel.Webflow
+context.rec.read=project:Client.RecNetworking
+context.rec.write=project:Client.RecNetworking
+context.rec-marketing.read=project:Client.RecNetworking.Marketing
+context.rec-marketing.write=project:Client.RecNetworking.Marketing
+context.rec-branding.read=project:Client.RecNetworking.Branding
+context.rec-branding.write=project:Client.RecNetworking.Branding
 
 # --- 5. INTEGRATIONS (TIMEW & THEME) ------------------------------------------
 hooks.on=on
@@ -54,6 +64,7 @@ uda.taskwarrior-id.type=string
 
 # Path to your colorscheme
 include ~/task-3.4.2/doc/rc/dark-gray-blue-256.theme
+#include ~/task-3.4.2/doc/rc/light-256.theme
 
 # --- 2. Custom Color Rules SECOND (Overrides) ---
 color.tag.p1=bold red
@@ -65,7 +76,7 @@ color.tag.p4=color8
 
 
 # DEFAULT VIEW
-report.next.columns=id,project,importance,exigency,description,tags,urgency
+report.next.columns=id,project,importance,exigency,description.count,tags,urgency
 report.next.labels=ID,Proj,Imp,Exig,Description,Tag,Urg
 
 # Q1: THE CRITIAL 
