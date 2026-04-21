@@ -1,4 +1,19 @@
 return {
+    {
+        'jpwol/thorn.nvim',
+        lazy = false,
+        opts = {
+            transparent = true,
+        },
+    },
+    {
+        'oskarnurm/koda.nvim',
+        lazy = false, -- make sure we load this during startup if it is your main colorscheme
+        config = function()
+            require('koda').setup({ transparent = true })
+            vim.cmd('colorscheme koda')
+        end,
+    },
     'clpi/cyu.lua',
     'maxmx03/solarized.nvim',
     { 'catppuccin/nvim', name = 'catppuccin' },
