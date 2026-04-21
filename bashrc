@@ -124,3 +124,11 @@ PATH="$VOLTA_HOME/bin:$PATH"
 export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
 export PATH="$JAVA_HOME/bin:$PATH"
 . "$HOME/.cargo/env"
+
+# pnpm
+export PNPM_HOME="/home/augusto/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
