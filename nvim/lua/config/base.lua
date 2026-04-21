@@ -3,7 +3,7 @@ vim.cmd('autocmd!')
 -- stylua: ignore start
 
 -- Listchars
-vim.opt.list            = true
+vim.opt.list            = false
 vim.opt.listchars:append "space:⋅"
 vim.opt.listchars:append "eol:↴"
 
