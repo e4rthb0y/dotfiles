@@ -3,11 +3,11 @@ return {
     opts = {
         set_dark_mode = function()
             local themery = require('themery')
-            themery.setThemeByName('catppuccin macchiato', true)
+            themery.setThemeByName('thorn-dark-warm', true)
         end,
         set_light_mode = function()
             local themery = require('themery')
-            themery.setThemeByName('tokyonight day', true)
+            themery.setThemeByName('koda-glade', true)
         end,
         update_interval = 3000,
         fallback = 'dark',

@@ -1,6 +1,70 @@
 local setup = function()
     local THEMES = {
         {
+            name = 'thorn dark warm',
+            colorscheme = 'thorn-dark-warm',
+            before = [[
+                vim.opt.background = 'dark'
+                require('lualine').setup({ options = { theme = 'auto' } })
+            ]],
+        },
+        {
+            name = 'thorn dark cold',
+            colorscheme = 'thorn-dark-cold',
+            before = [[
+                vim.opt.background = 'dark'
+                require('lualine').setup({ options = { theme = 'auto' } })
+            ]],
+        },
+        {
+            name = 'thorn light warm',
+            colorscheme = 'thorn-light-warm',
+            before = [[
+                vim.opt.background = 'light'
+                require('lualine').setup({ options = { theme = 'auto' } })
+            ]],
+        },
+        {
+            name = 'thorn light cold',
+            colorscheme = 'thorn-light-cold',
+            before = [[
+                vim.opt.background = 'light'
+                require('lualine').setup({ options = { theme = 'auto' } })
+            ]],
+        },
+        {
+            name = 'koda dark',
+            colorscheme = 'koda-dark',
+            before = [[
+                vim.opt.background = 'dark'
+                require('lualine').setup({ options = { theme = 'auto' } })
+            ]],
+        },
+        {
+            name = 'koda light',
+            colorscheme = 'koda-light',
+            before = [[
+                vim.opt.background = 'light'
+                require('lualine').setup({ options = { theme = 'auto' } })
+            ]],
+        },
+        {
+            name = 'koda moss',
+            colorscheme = 'koda-moss',
+            before = [[
+                vim.opt.background = 'dark'
+                require('lualine').setup({ options = { theme = 'auto' } })
+            ]],
+        },
+        {
+            name = 'koda glade',
+            colorscheme = 'koda-glade',
+            before = [[
+                vim.opt.background = 'light'
+                require('lualine').setup({ options = { theme = 'auto' } })
+            ]],
+        },
+        {
             name = 'adwaita',
             colorscheme = 'adwaita',
             before = [[ require('lualine').setup({ options = { theme = 'auto' } }) ]],
