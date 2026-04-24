@@ -81,38 +81,6 @@ local function config()
 
     neotree.setup(setup())
 
-    -- Icons for diagnostic errors
-
-    -- stylua: ignore
-    local DIAGNOSTICS_SIGNS = {
-        WARN    = 'DiagnosticSignWarn',
-        INFO    = 'DiagnosticSignInfo',
-        HINT    = 'DiagnosticSignHint',
-        ERROR   = 'DiagnosticSignError',
-    }
-
-    vim.fn.sign_define(
-        DIAGNOSTICS_SIGNS.ERROR,
-        { text = ' ', texthl = DIAGNOSTICS_SIGNS.ERROR }
-    )
-
-    vim.fn.sign_define(
-        DIAGNOSTICS_SIGNS.WARN,
-        { text = ' ', texthl = DIAGNOSTICS_SIGNS.WARN }
-    )
-
-    vim.fn.sign_define(
-        DIAGNOSTICS_SIGNS.INFO,
-        { text = ' ', texthl = DIAGNOSTICS_SIGNS.INFO }
-    )
-
-    vim.fn.sign_define(
-        DIAGNOSTICS_SIGNS.HINT,
-        { text = ' ', texthl = DIAGNOSTICS_SIGNS.HINT }
-    )
-
-    -- stylua: ignore end
-
     vim.cmd([[nnoremap <leader>e :Neotree toggle current reveal_force_cwd<cr>]])
     vim.cmd([[nnoremap \| :Neotree focus filesystem float reveal toggle<cr>]])
     vim.cmd([[nnoremap <leader>b :Neotree toggle show buffers right<cr>]])

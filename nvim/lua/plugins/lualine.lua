@@ -83,7 +83,7 @@ local function lualine_config()
         function()
             return '▊'
         end,
-        color = { fg = colors.violet },    -- Sets highlighting of component
+        color = { fg = colors.violet }, -- Sets highlighting of component
         padding = { left = 0, right = 1 }, -- We don't need space before this
     })
 
@@ -159,26 +159,25 @@ local function lualine_config()
     ins_left({
         -- Lsp server name .
         function()
-            local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-            local clients = vim.lsp.get_active_clients()
+            local clients = vim.lsp.get_clients({ bufnr = 0 })
 
-            if next(clients) == nil then
+            if #clients == 0 then
                 return ''
             end
 
+            local names = {}
             for _, client in ipairs(clients) do
-                local filetypes = client.config.filetypes
-                if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                    return ' LSP: ' .. client.name
-                end
+                table.insert(names, client.name)
             end
+
+            return ' LSP: ' .. table.concat(names, ', ')
         end,
         color = { fg = '#ffffff', gui = 'bold' },
     })
 
     -- Add components to right sections
     ins_right({
-        'o:encoding',       -- option component same as &encoding in viml
+        'o:encoding', -- option component same as &encoding in viml
         fmt = string.upper, -- I'm not sure why it's upper case either ;)
         cond = conditions.hide_in_width,
         color = { fg = colors.green, gui = 'bold' },
