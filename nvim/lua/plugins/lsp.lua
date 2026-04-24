@@ -115,7 +115,7 @@ return {
         'seblyng/roslyn.nvim', -- C# engine
     },
     config = function()
-        vim.lsp.set_log_level('debug')
+        vim.lsp.log.set_level('debug')
         vim.lsp.log_path = vim.fn.stdpath('state') .. '/lsp.log'
         set_lspconfig()
         set_keymaps()
