@@ -34,6 +34,7 @@ local setup = function()
 end
 
 local function add_blade_parser()
+    ---@type table<string, unknown>
     local parser_config =
         require('nvim-treesitter.parsers').get_parser_configs()
 
