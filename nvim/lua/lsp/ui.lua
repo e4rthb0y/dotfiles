@@ -2,6 +2,14 @@ local M = {}
 
 function M.setup()
     vim.diagnostic.config({
+        signs = {
+            text = {
+                [vim.diagnostic.severity.ERROR] = ' ',
+                [vim.diagnostic.severity.WARN] = ' ',
+                [vim.diagnostic.severity.INFO] = ' ',
+                [vim.diagnostic.severity.HINT] = ' ',
+            },
+        },
         virtual_text = {
             prefix = '●',
             spacing = 4,
@@ -11,23 +19,20 @@ function M.setup()
         severity_sort = true,
         float = {
             focusable = false,
-            border = 'none',
-            source = 'always',
+            border = 'rounded',
+            source = true,
             header = '',
             prefix = '',
         },
     })
 
-    local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-    function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-        opts = opts or {}
-        opts.border = opts.border or 'rounded'
-
-        local bufnr, winnr =
-            orig_util_open_floating_preview(contents, syntax, opts, ...)
-
-        return bufnr, winnr
-    end
+    -- Modern Neovim 0.11+ way to set global borders for LSP windows
+    vim.lsp.config('*', {
+        window = {
+            hover = { border = 'rounded' },
+            signature_help = { border = 'rounded' },
+        },
+    })
 end
 
 return M

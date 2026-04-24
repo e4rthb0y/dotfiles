@@ -16,7 +16,6 @@ end
 function M.setup()
     local cmp = require('cmp')
     local lspkind = require('lspkind')
-    local luasnip = require('luasnip')
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
     vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
@@ -36,12 +35,11 @@ function M.setup()
         },
         snippet = {
             expand = function(args)
-                luasnip.lsp_expand(args.body)
+                vim.snippet.expand(args.body)
             end,
         },
         sources = cmp.config.sources({
             { name = 'nvim_lsp', priority = 1000 },
-            { name = 'luasnip', priority = 750 },
         }, {
             { name = 'buffer', priority = 500 },
             { name = 'path', priority = 250 },
@@ -55,12 +53,12 @@ function M.setup()
                 copy_diagnostics()
             end,
 
-            -- Jump forward/backward in completion suggestions
+            -- Jump forward/backward in snippets
             ['<Tab>'] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item(cmp_select)
-                elseif luasnip.expand_or_locally_jumpable() then
-                    luasnip.expand_or_jump()
+                elseif vim.snippet.active({ direction = 1 }) then
+                    vim.snippet.jump(1)
                 else
                     fallback()
                 end
@@ -68,24 +66,24 @@ function M.setup()
             ['<S-Tab>'] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item(cmp_select)
-                elseif luasnip.locally_jumpable(-1) then
-                    luasnip.jump(-1)
+                elseif vim.snippet.active({ direction = -1 }) then
+                    vim.snippet.jump(-1)
                 else
                     fallback()
                 end
             end, { 'i', 's' }),
 
-            -- Jump forward/backward in snippets
+            -- Additional jump bindings
             ['<C-f>'] = cmp.mapping(function(fallback)
-                if luasnip.locally_jumpable(1) then
-                    luasnip.jump(1)
+                if vim.snippet.active({ direction = 1 }) then
+                    vim.snippet.jump(1)
                 else
                     fallback()
                 end
             end, { 'i', 's' }),
             ['<C-b>'] = cmp.mapping(function(fallback)
-                if luasnip.locally_jumpable(-1) then
-                    luasnip.jump(-1)
+                if vim.snippet.active({ direction = -1 }) then
+                    vim.snippet.jump(-1)
                 else
                     fallback()
                 end

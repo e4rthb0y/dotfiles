@@ -1,6 +1,6 @@
 local function treesittertrunc(_, buf)
     local max_filesize = 100 * 1024 -- 100 KB
-    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+    local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
 
     if ok and stats and stats.size > max_filesize then
         return true
@@ -34,6 +34,7 @@ local setup = function()
 end
 
 local function add_blade_parser()
+    ---@type table<string, unknown>
     local parser_config =
         require('nvim-treesitter.parsers').get_parser_configs()
 

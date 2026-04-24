@@ -20,6 +20,7 @@ local function set_lspconfig()
         end
 
         vim.lsp.config(server_name, opts)
+        vim.lsp.enable(server_name)
     end
 
     mason_lspconfig.setup({
@@ -52,7 +53,6 @@ local function set_keymaps()
             end
 
             map('n', 'gd', vim.lsp.buf.definition, 'Goto Definition')
-            map('n', 'gr', vim.lsp.buf.references, 'Goto Reference')
             map('n', 'K', vim.lsp.buf.hover, 'Hover')
             map(
                 'n',
@@ -62,9 +62,6 @@ local function set_keymaps()
             )
             map('n', '[d', vim.diagnostic.goto_next, 'Next Diagnostic')
             map('n', ']d', vim.diagnostic.goto_prev, 'Previous Diagnostic')
-            map('n', 'crr', vim.lsp.buf.code_action, 'Code Action')
-            map('n', 'crn', vim.lsp.buf.rename, 'Rename')
-            map('i', '<C-S>', vim.lsp.buf.signature_help, 'Signature Help')
             map(
                 'n',
                 '<leader>vws',
@@ -108,9 +105,6 @@ return {
         'hrsh7th/cmp-buffer',
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-cmdline',
-        'saadparwaiz1/cmp_luasnip',
-        'L3MON4D3/LuaSnip',
-        'rafamadriz/friendly-snippets',
         'onsails/lspkind.nvim',
 
         -- servers
@@ -121,7 +115,7 @@ return {
         'seblyng/roslyn.nvim', -- C# engine
     },
     config = function()
-        vim.lsp.set_log_level('debug')
+        vim.lsp.log.set_level('debug')
         vim.lsp.log_path = vim.fn.stdpath('state') .. '/lsp.log'
         set_lspconfig()
         set_keymaps()
