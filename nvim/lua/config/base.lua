@@ -59,3 +59,7 @@ vim.opt.path:append         { '**' }
 vim.opt.wildignore:append   { '*/node_modules/*' }
 
 -- stylua: ignore end
+
+-- Neovim 0.12+ Experimental UI
+require('vim._core.ui2').enable({ enable = true })
+

@@ -53,7 +53,6 @@ local function set_keymaps()
             end
 
             map('n', 'gd', vim.lsp.buf.definition, 'Goto Definition')
-            map('n', 'gr', vim.lsp.buf.references, 'Goto Reference')
             map('n', 'K', vim.lsp.buf.hover, 'Hover')
             map(
                 'n',
@@ -63,9 +62,6 @@ local function set_keymaps()
             )
             map('n', '[d', vim.diagnostic.goto_next, 'Next Diagnostic')
             map('n', ']d', vim.diagnostic.goto_prev, 'Previous Diagnostic')
-            map('n', 'crr', vim.lsp.buf.code_action, 'Code Action')
-            map('n', 'crn', vim.lsp.buf.rename, 'Rename')
-            map('i', '<C-S>', vim.lsp.buf.signature_help, 'Signature Help')
             map(
                 'n',
                 '<leader>vws',
