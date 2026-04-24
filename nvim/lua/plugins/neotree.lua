@@ -80,11 +80,6 @@ local function config()
     local neotree = require('neo-tree')
 
     neotree.setup(setup())
-
-    vim.cmd([[nnoremap <leader>e :Neotree toggle current reveal_force_cwd<cr>]])
-    vim.cmd([[nnoremap \| :Neotree focus filesystem float reveal toggle<cr>]])
-    vim.cmd([[nnoremap <leader>b :Neotree toggle show buffers right<cr>]])
-    vim.cmd([[nnoremap gs :Neotree float git_status<cr>]])
 end
 
 local window_picker_setup = function()
@@ -117,4 +112,11 @@ return {
         },
     },
     config = config,
+    cmd = 'Neotree',
+    keys = {
+        { '<leader>e', '<cmd>Neotree toggle current reveal_force_cwd<cr>', desc = 'Neo-tree Toggle' },
+        { '|', '<cmd>Neotree focus filesystem float reveal toggle<cr>', desc = 'Neo-tree Float' },
+        { '<leader>b', '<cmd>Neotree toggle show buffers right<cr>', desc = 'Neo-tree Buffers' },
+        { 'gs', '<cmd>Neotree float git_status<cr>', desc = 'Neo-tree Git Status' },
+    },
 }

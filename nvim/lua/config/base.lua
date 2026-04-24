@@ -35,15 +35,13 @@ vim.opt.ruler           = true
 vim.opt.scrolloff       = 10
 vim.opt.title           = true
 vim.opt.wrap            = true
-vim.opt.clipboard       = "unnamedplus"
 
 -- Indentation
 vim.opt.autoindent      = true
 vim.opt.expandtab       = true
 vim.opt.shiftwidth      = 4
-vim.opt.smartindent     = true
-vim.opt.smarttab        = true
 vim.opt.tabstop         = 4
+-- vim.opt.smartindent is redundant with Treesitter indent
 
 -- Search
 vim.opt.hlsearch        = true
@@ -53,6 +51,10 @@ vim.opt.inccommand      = 'split'
 -- Cmd
 vim.opt.cmdheight       = 1
 vim.opt.showcmd         = true
+vim.opt.confirm         = true -- Confirm save on exit
+
+-- Clipboard
+vim.opt.clipboard:append { 'unnamed', 'unnamedplus' }
 
 -- File Paths
 vim.opt.path:append         { '**' }
@@ -62,4 +64,3 @@ vim.opt.wildignore:append   { '*/node_modules/*' }
 
 -- Neovim 0.12+ Experimental UI
 require('vim._core.ui2').enable({ enable = true })
-
