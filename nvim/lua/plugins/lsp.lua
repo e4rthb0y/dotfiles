@@ -20,6 +20,7 @@ local function set_lspconfig()
         end
 
         vim.lsp.config(server_name, opts)
+        vim.lsp.enable(server_name)
     end
 
     mason_lspconfig.setup({
