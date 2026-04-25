@@ -41,7 +41,6 @@ vim.opt.autoindent      = true
 vim.opt.expandtab       = true
 vim.opt.shiftwidth      = 4
 vim.opt.tabstop         = 4
--- vim.opt.smartindent is redundant with Treesitter indent
 
 -- Search
 vim.opt.hlsearch        = true
@@ -51,14 +50,10 @@ vim.opt.inccommand      = 'split'
 -- Cmd
 vim.opt.cmdheight       = 1
 vim.opt.showcmd         = true
-vim.opt.confirm         = true -- Confirm save on exit
+vim.opt.confirm         = true
 
 -- Clipboard
-vim.opt.clipboard:append { 'unnamed', 'unnamedplus' }
-
--- File Paths
-vim.opt.path:append         { '**' }
-vim.opt.wildignore:append   { '*/node_modules/*' }
+vim.opt.clipboard:append    { 'unnamed', 'unnamedplus' }
 
 -- stylua: ignore end
 
