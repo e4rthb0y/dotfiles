@@ -35,14 +35,11 @@ vim.opt.ruler           = true
 vim.opt.scrolloff       = 10
 vim.opt.title           = true
 vim.opt.wrap            = true
-vim.opt.clipboard       = "unnamedplus"
 
 -- Indentation
 vim.opt.autoindent      = true
 vim.opt.expandtab       = true
 vim.opt.shiftwidth      = 4
-vim.opt.smartindent     = true
-vim.opt.smarttab        = true
 vim.opt.tabstop         = 4
 
 -- Search
@@ -53,13 +50,12 @@ vim.opt.inccommand      = 'split'
 -- Cmd
 vim.opt.cmdheight       = 1
 vim.opt.showcmd         = true
+vim.opt.confirm         = true
 
--- File Paths
-vim.opt.path:append         { '**' }
-vim.opt.wildignore:append   { '*/node_modules/*' }
+-- Clipboard
+vim.opt.clipboard:append    { 'unnamed', 'unnamedplus' }
 
 -- stylua: ignore end
 
 -- Neovim 0.12+ Experimental UI
 require('vim._core.ui2').enable({ enable = true })
-
