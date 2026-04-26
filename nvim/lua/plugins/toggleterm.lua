@@ -1,5 +1,5 @@
 local function config()
-    require('toggleterm').setup()
+    require('toggleterm').setup({ direction = 'float' })
     vim.api.nvim_create_autocmd('TermOpen', {
         pattern = 'term://*toggleterm#*',
         callback = function()
