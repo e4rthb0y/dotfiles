@@ -27,6 +27,12 @@ local function config()
         '<cmd>TermPrev<CR>',
         { desc = 'Previous Terminal' }
     )
+    vim.keymap.set(
+        'n',
+        '<leader>ft',
+        '<cmd>TermSelect<CR>',
+        { desc = 'List Terminals' }
+    )
 end
 
 return { 'akinsho/toggleterm.nvim', version = '*', config = config }

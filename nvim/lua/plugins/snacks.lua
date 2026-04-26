@@ -27,22 +27,5 @@ return {
     keys = {
         { '<leader>n', function() Snacks.notifier.show_history() end, desc = 'Notification History' },
         { '<leader>un', function() Snacks.notifier.hide() end, desc = 'Dismiss All Notifications' },
-        {
-            '<leader>ft',
-            function()
-                Snacks.picker.buffers({
-                    filter = { buftype = 'terminal' },
-                    layout = 'select',
-                    win = {
-                        list = {
-                            keys = {
-                                ['<c-d>'] = 'buf_delete',
-                            },
-                        },
-                    },
-                })
-            end,
-            desc = 'Terminal Buffers',
-        },
     },
 }
