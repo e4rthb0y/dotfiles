@@ -25,7 +25,31 @@ return {
         words = { enabled = true },
     },
     keys = {
-        { '<leader>n', function() Snacks.notifier.show_history() end, desc = 'Notification History' },
-        { '<leader>un', function() Snacks.notifier.hide() end, desc = 'Dismiss All Notifications' },
+        {
+            '<leader>n',
+            function()
+                Snacks.notifier.show_history()
+            end,
+            desc = 'Notification History',
+        },
+        {
+            '<leader>un',
+            function()
+                Snacks.notifier.hide()
+            end,
+            desc = 'Dismiss All Notifications',
+        },
+        {
+            '<leader>;',
+            function()
+                Snacks.dashboard.open()
+            end,
+            desc = 'Dashboard',
+        },
     },
+    init = function()
+        vim.api.nvim_create_user_command('Dashboard', function()
+            Snacks.dashboard.open()
+        end, { desc = 'Open Snacks Dashboard' })
+    end,
 }
