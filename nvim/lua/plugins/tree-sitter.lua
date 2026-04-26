@@ -17,6 +17,10 @@ local setup = function()
         'json',
         'python',
         'jsdoc',
+        'markdown',
+        'markdown_inline',
+        'ini',
+        'editorconfig',
     }
 
     local highlight = {
@@ -64,6 +68,6 @@ end
 return {
     'nvim-treesitter/nvim-treesitter',
     dependencies = 'nvim-treesitter/playground',
-    build = ':TSUpate',
+    build = ':TSUpdate',
     config = config,
 }
