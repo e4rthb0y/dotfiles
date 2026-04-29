@@ -26,7 +26,7 @@ A high-performance, standalone Neovim configuration optimized for **Neovim 0.12+
 
 1. Clone this repository into your Neovim config directory:
    ```bash
-   git clone https://github.com/your-repo/nvim.git ~/.config/nvim
+   git clone https://github.com/e4rthb0y/nvim.git ~/.config/nvim
    ```
 2. Launch Neovim:
    ```bash
