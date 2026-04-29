@@ -10,23 +10,11 @@ local function config()
             local opts = { buffer = 0 }
             vim.keymap.set('t', '<C-l>', [[<C-l>]], opts)
 
-            vim.keymap.set('t', '<Tab>', [[<C-\><C-n>:TermNext<CR>]], opts)
-            vim.keymap.set('t', '<S-Tab>', [[<C-\><C-n>:TermPrev<CR>]], opts)
+            vim.keymap.set('t', '<A-n>', [[<C-\><C-n>:TermNext<CR>]], opts)
+            vim.keymap.set('t', '<A-p>', [[<C-\><C-n>:TermPrev<CR>]], opts)
         end,
     })
 
-    vim.keymap.set(
-        'n',
-        '<Tab>',
-        '<cmd>TermNext<CR>',
-        { desc = 'Next Terminal' }
-    )
-    vim.keymap.set(
-        'n',
-        '<S-Tab>',
-        '<cmd>TermPrev<CR>',
-        { desc = 'Previous Terminal' }
-    )
     vim.keymap.set(
         'n',
         '<leader>ft',
