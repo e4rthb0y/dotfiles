@@ -1,5 +1,8 @@
 -- Python
-vim.g.python3_host_prog = '/Users/augusto/.pyenv/versions/neovim/bin/python3.11'
+local python_path = vim.fn.exepath('python3')
+if python_path ~= '' then
+    vim.g.python3_host_prog = python_path
+end
 
 -- Ruby
 vim.g.loaded_ruby_provider = 0
