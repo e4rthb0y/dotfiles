@@ -50,8 +50,9 @@ export async function run(cacheProvider?: ICacheProvider<AuthData>) {
         // Fetch the App's information to get its slug and ID
         const { data: appInfo } = await app.octokit.rest.apps.getAuthenticated()
 
+        if (!appInfo) throw new Error('Failed to fetch GitHub App information')
+
         const botName = `${appInfo.slug}[bot]`
-        // Official GitHub bot email format: id+slug[bot]@users.noreply.github.com
         const botEmail = `${appInfo.id}+${botName}@users.noreply.github.com`
 
         const authData: AuthData = {
