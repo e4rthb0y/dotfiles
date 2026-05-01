@@ -19,15 +19,16 @@ export async function run(cacheProvider?: ICacheProvider<string>) {
     const APP_ID = Deno.env.get('GH_APP_ID')
     const INSTALLATION_ID = Deno.env.get('GH_INSTALLATION_ID')
     const KEY_PATH = Deno.env.get('GH_APP_KEY_PATH')
+    const SEED = Deno.env.get('GH_CACHE_SEED')
 
-    if (!APP_ID || !INSTALLATION_ID || !KEY_PATH) {
+    if (!APP_ID || !INSTALLATION_ID || !KEY_PATH || !SEED) {
         throw new Error(
-            'Missing required environment variables: GH_APP_ID, GH_INSTALLATION_ID, GH_APP_KEY_PATH',
+            'Missing required environment variables: GH_APP_ID, GH_INSTALLATION_ID, GH_APP_KEY_PATH, GH_CACHE_SEED',
         )
     }
 
     const CACHE_PATH = join(__dirname, '.cache.json')
-    const cache = cacheProvider || new FileCacheProvider(CACHE_PATH)
+    const cache = cacheProvider || new FileCacheProvider(CACHE_PATH, SEED)
 
     try {
         const cachedToken = await cache.get()

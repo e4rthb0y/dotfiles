@@ -8,30 +8,77 @@ export interface ICacheProvider<T> {
     set(data: T, expiresAt: string): Promise<void>
 }
 
-export class FileCacheProvider<T> implements ICacheProvider<T> {
+export class FileCacheProvider implements ICacheProvider<string> {
+    private key: CryptoKey | null = null;
+
     constructor(
         private cacheFilePath: string,
+        private seed: string,
         private bufferMs: number = 300000,
     ) {}
 
-    async get(): Promise<T | null> {
-        try {
-            const raw = await Deno.readTextFile(this.cacheFilePath)
-            const entry: CacheEntry<T> = JSON.parse(raw)
-            if (this.isExpired(entry)) return null
+    private async getKey(): Promise<CryptoKey> {
+        if (this.key) return this.key;
 
-            return entry.data
+        const rawSeed = new TextEncoder().encode(this.seed);
+        // Ensure the seed is hashed to a fixed length suitable for AES (256-bit)
+        const hash = await crypto.subtle.digest("SHA-256", rawSeed);
+        
+        this.key = await crypto.subtle.importKey(
+            "raw",
+            hash,
+            { name: "AES-GCM" },
+            false,
+            ["encrypt", "decrypt"]
+        );
+        
+        return this.key;
+    }
+
+    async get(): Promise<string | null> {
+        try {
+            const raw = await Deno.readTextFile(this.cacheFilePath);
+            const entry: { iv: string; encrypted: string; expiresAt: string } = JSON.parse(raw);
+            
+            if (this.isExpired(entry.expiresAt)) return null;
+
+            const key = await this.getKey();
+            const iv = Uint8Array.from(atob(entry.iv), (c) => c.charCodeAt(0));
+            const encryptedData = Uint8Array.from(atob(entry.encrypted), (c) => c.charCodeAt(0));
+
+            const decrypted = await crypto.subtle.decrypt(
+                { name: "AES-GCM", iv },
+                key,
+                encryptedData
+            );
+
+            return new TextDecoder().decode(decrypted);
         } catch {
-            return null
+            return null;
         }
     }
 
-    async set(data: T, expiresAt: string): Promise<void> {
-        const entry: CacheEntry<T> = { data, expiresAt }
-        await Deno.writeTextFile(this.cacheFilePath, JSON.stringify(entry, null, 2))
+    async set(data: string, expiresAt: string): Promise<void> {
+        const key = await this.getKey();
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const encodedData = new TextEncoder().encode(data);
+
+        const encrypted = await crypto.subtle.encrypt(
+            { name: "AES-GCM", iv },
+            key,
+            encodedData
+        );
+
+        const entry = {
+            iv: btoa(String.fromCharCode(...iv)),
+            encrypted: btoa(String.fromCharCode(...new Uint8Array(encrypted))),
+            expiresAt,
+        };
+
+        await Deno.writeTextFile(this.cacheFilePath, JSON.stringify(entry, null, 2));
     }
 
-    private isExpired<T>(entry: CacheEntry<T>): boolean {
-        return Date.now() > new Date(entry.expiresAt).getTime() - this.bufferMs
+    private isExpired(expiresAt: string): boolean {
+        return Date.now() > new Date(expiresAt).getTime() - this.bufferMs;
     }
 }

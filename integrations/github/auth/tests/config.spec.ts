@@ -3,7 +3,7 @@ import { join } from '@std/path'
 import { App } from 'octokit'
 
 Deno.test('Configuration - required environment variables', () => {
-    const required = ['GH_APP_ID', 'GH_INSTALLATION_ID', 'GH_APP_KEY_PATH']
+    const required = ['GH_APP_ID', 'GH_INSTALLATION_ID', 'GH_APP_KEY_PATH', 'GH_CACHE_SEED']
     for (const env of required) {
         assert(Deno.env.get(env), `Environment variable ${env} is missing`)
     }
