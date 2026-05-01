@@ -3,8 +3,10 @@ import { load } from '@std/dotenv'
 import { App } from 'octokit'
 import { FileCacheProvider, ICacheProvider } from './cache.ts'
 
-interface OctokitAuthResponse {
+interface AuthData {
     token: string
+    name: string
+    email: string
     expiresAt: string
 }
 
@@ -16,7 +18,7 @@ await load({
     envPath: join(rootDir, '.env'),
 })
 
-export async function run(cacheProvider?: ICacheProvider<string>) {
+export async function run(cacheProvider?: ICacheProvider<AuthData>) {
     const APP_ID = Deno.env.get('GH_APP_ID')
     const INSTALLATION_ID = Deno.env.get('GH_INSTALLATION_ID')
     const KEY_PATH = Deno.env.get('GH_APP_KEY_PATH')
@@ -29,22 +31,36 @@ export async function run(cacheProvider?: ICacheProvider<string>) {
     }
 
     const CACHE_PATH = join(rootDir, '.cache.json')
-    const cache = cacheProvider || new FileCacheProvider(CACHE_PATH, SEED)
+    const cache = cacheProvider || new FileCacheProvider<AuthData>(CACHE_PATH, SEED)
 
     try {
-        const cachedToken = await cache.get()
-        if (cachedToken) {
-            Deno.stdout.writeSync(new TextEncoder().encode(cachedToken))
+        const cached = await cache.get()
+        if (cached) {
+            Deno.stdout.writeSync(new TextEncoder().encode(JSON.stringify(cached)))
             return
         }
 
         const privateKey = await Deno.readTextFile(KEY_PATH)
         const app = new App({ appId: APP_ID, privateKey })
-        const octokit = await app.getInstallationOctokit(Number(INSTALLATION_ID))
-        const auth = (await octokit.auth()) as OctokitAuthResponse
+        
+        const { data: auth } = await app.octokit.rest.apps.createInstallationAccessToken({
+            installation_id: Number(INSTALLATION_ID),
+        })
 
-        await cache.set(auth.token, auth.expiresAt)
-        Deno.stdout.writeSync(new TextEncoder().encode(auth.token))
+        const { data: installation } = await app.octokit.rest.apps.getInstallation({
+            installation_id: Number(INSTALLATION_ID),
+        })
+        
+        const botName = installation.account?.login || "github-app[bot]"
+        const authData: AuthData = {
+            token: auth.token,
+            name: botName,
+            email: `${botName}@users.noreply.github.com`,
+            expiresAt: auth.expires_at,
+        }
+
+        await cache.set(authData, auth.expires_at)
+        Deno.stdout.writeSync(new TextEncoder().encode(JSON.stringify(authData)))
     } catch (error: unknown) {
         let message: string
 

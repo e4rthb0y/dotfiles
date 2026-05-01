@@ -8,7 +8,7 @@ export interface ICacheProvider<T> {
     set(data: T, expiresAt: string): Promise<void>
 }
 
-export class FileCacheProvider implements ICacheProvider<string> {
+export class FileCacheProvider<T> implements ICacheProvider<T> {
     private key: CryptoKey | null = null;
 
     constructor(
@@ -35,7 +35,7 @@ export class FileCacheProvider implements ICacheProvider<string> {
         return this.key;
     }
 
-    async get(): Promise<string | null> {
+    async get(): Promise<T | null> {
         try {
             const raw = await Deno.readTextFile(this.cacheFilePath);
             const entry: { iv: string; encrypted: string; expiresAt: string } = JSON.parse(raw);
@@ -52,16 +52,17 @@ export class FileCacheProvider implements ICacheProvider<string> {
                 encryptedData
             );
 
-            return new TextDecoder().decode(decrypted);
+            const decoded = new TextDecoder().decode(decrypted);
+            return JSON.parse(decoded) as T;
         } catch {
             return null;
         }
     }
 
-    async set(data: string, expiresAt: string): Promise<void> {
+    async set(data: T, expiresAt: string): Promise<void> {
         const key = await this.getKey();
         const iv = crypto.getRandomValues(new Uint8Array(12));
-        const encodedData = new TextEncoder().encode(data);
+        const encodedData = new TextEncoder().encode(JSON.stringify(data));
 
         const encrypted = await crypto.subtle.encrypt(
             { name: "AES-GCM", iv },

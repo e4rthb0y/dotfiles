@@ -6,4 +6,4 @@ deno run --quiet \
   --allow-read="$HOME" \
   --allow-net=api.github.com \
   --allow-write="$DIR" \
-  "$DIR/integrations/github/auth/src/index.ts"
+  "$DIR/src/index.ts"
