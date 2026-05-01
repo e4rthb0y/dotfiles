@@ -2,8 +2,10 @@
 
 # This script should be sourced: source bin/agent-env.sh
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+# Resolve the physical path of this script to handle symlinks correctly
+REAL_PATH=$(readlink -f "${BASH_SOURCE[0]}")
+SCRIPT_DIR=$(cd "$(dirname "$REAL_PATH")" && pwd)
+DOTFILES_DIR=$(cd "$SCRIPT_DIR/.." && pwd)
 AUTH_SCRIPT="$DOTFILES_DIR/integrations/github/auth/run.sh"
 
 if [ ! -f "$AUTH_SCRIPT" ]; then

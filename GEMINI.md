@@ -8,7 +8,7 @@ This workspace features a robust GitHub integration for task management, identit
 ### Mandatory Environment Setup
 Before performing any git operations or using the `gh` CLI, you MUST source the environment setup script:
 ```bash
-source bin/agent-env.sh
+source ~/.agent-env.sh
 ```
 This script automatically:
 1. Authenticates using the workspace's GitHub App.
