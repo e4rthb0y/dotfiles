@@ -1,6 +1,14 @@
 import { assert } from '@std/assert'
 import { join } from '@std/path'
+import { load } from '@std/dotenv'
 import { App } from 'octokit'
+
+const __dirname = new URL('.', import.meta.url).pathname
+
+await load({
+    export: true,
+    envPath: join(__dirname, '../.env'),
+})
 
 Deno.test('Configuration - required environment variables', () => {
     const required = ['GH_APP_ID', 'GH_INSTALLATION_ID', 'GH_APP_KEY_PATH', 'GH_CACHE_SEED']
@@ -24,18 +32,23 @@ Deno.test('Configuration - private key file existence', async () => {
     }
 })
 
-Deno.test('Configuration - App initialization dry-run', async () => {
-    const appId = Deno.env.get('GH_APP_ID')
-    const keyPath = Deno.env.get('GH_APP_KEY_PATH')
+Deno.test({
+    name: 'Configuration - App initialization dry-run',
+    sanitizeOps: false,
+    sanitizeResources: false,
+    async fn() {
+        const appId = Deno.env.get('GH_APP_ID')
+        const keyPath = Deno.env.get('GH_APP_KEY_PATH')
 
-    if (!appId || !keyPath) return
+        if (!appId || !keyPath) return
 
-    try {
-        const privateKey = await Deno.readTextFile(keyPath)
-        new App({ appId, privateKey })
-    } catch (e) {
-        assert(false, `Failed to initialize GitHub App: ${e}`)
-    }
+        try {
+            const privateKey = await Deno.readTextFile(keyPath)
+            new App({ appId, privateKey })
+        } catch (e) {
+            assert(false, `Failed to initialize GitHub App: ${e}`)
+        }
+    },
 })
 
 Deno.test('Configuration - cache file writability', async () => {

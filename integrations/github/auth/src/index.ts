@@ -9,10 +9,11 @@ interface OctokitAuthResponse {
 }
 
 const __dirname = new URL('.', import.meta.url).pathname
+const rootDir = join(__dirname, '..')
 
 await load({
     export: true,
-    envPath: join(__dirname, '.env'),
+    envPath: join(rootDir, '.env'),
 })
 
 export async function run(cacheProvider?: ICacheProvider<string>) {
@@ -27,7 +28,7 @@ export async function run(cacheProvider?: ICacheProvider<string>) {
         )
     }
 
-    const CACHE_PATH = join(__dirname, '.cache.json')
+    const CACHE_PATH = join(rootDir, '.cache.json')
     const cache = cacheProvider || new FileCacheProvider(CACHE_PATH, SEED)
 
     try {
