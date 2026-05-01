@@ -42,20 +42,22 @@ export async function run(cacheProvider?: ICacheProvider<AuthData>) {
 
         const privateKey = await Deno.readTextFile(KEY_PATH)
         const app = new App({ appId: APP_ID, privateKey })
-        
+
         const { data: auth } = await app.octokit.rest.apps.createInstallationAccessToken({
             installation_id: Number(INSTALLATION_ID),
         })
 
-        const { data: installation } = await app.octokit.rest.apps.getInstallation({
-            installation_id: Number(INSTALLATION_ID),
-        })
-        
-        const botName = installation.account?.login || "github-app[bot]"
+        // Fetch the App's information to get its slug and ID
+        const { data: appInfo } = await app.octokit.rest.apps.getAuthenticated()
+
+        const botName = `${appInfo.slug}[bot]`
+        // Official GitHub bot email format: id+slug[bot]@users.noreply.github.com
+        const botEmail = `${appInfo.id}+${botName}@users.noreply.github.com`
+
         const authData: AuthData = {
             token: auth.token,
             name: botName,
-            email: `${botName}@users.noreply.github.com`,
+            email: botEmail,
             expiresAt: auth.expires_at,
         }
 
