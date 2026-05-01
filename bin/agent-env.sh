@@ -7,16 +7,14 @@ DOTFILES_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 AUTH_SCRIPT="$DOTFILES_DIR/integrations/github/auth/run.sh"
 
 if [ ! -f "$AUTH_SCRIPT" ]; then
-    echo "Error: GitHub auth script not found at $AUTH_SCRIPT"
-    return 1 2>/dev/null || exit 1
+    echo "Error: GitHub auth script not found at $AUTH_SCRIPT" >&2
+    [[ "${BASH_SOURCE[0]}" == "${0}" ]] && exit 1 || return 1
 fi
 
 # Get Auth Data in JSON format
-AUTH_JSON=$("$AUTH_SCRIPT")
-
-if [ $? -ne 0 ] || [ -z "$AUTH_JSON" ]; then
-    echo "Error: Failed to obtain GitHub authentication data."
-    return 1 2>/dev/null || exit 1
+if ! AUTH_JSON=$("$AUTH_SCRIPT") || [ -z "$AUTH_JSON" ]; then
+    echo "Error: Failed to obtain GitHub authentication data." >&2
+    [[ "${BASH_SOURCE[0]}" == "${0}" ]] && exit 1 || return 1
 fi
 
 # Parse JSON using jq
