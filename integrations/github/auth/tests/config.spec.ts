@@ -1,7 +1,7 @@
 import { assert } from '@std/assert'
 import { join } from '@std/path'
 import { load } from '@std/dotenv'
-import { App } from 'octokit'
+import { App, Octokit } from 'octokit'
 
 const __dirname = new URL('.', import.meta.url).pathname
 
@@ -34,6 +34,8 @@ Deno.test('Configuration - private key file existence', async () => {
 
 Deno.test({
     name: 'Configuration - App initialization dry-run',
+    // We disable sanitizers because Octokit starts internal bottleneck intervals
+    // that do not expose a shutdown hook for dry-run scenarios.
     sanitizeOps: false,
     sanitizeResources: false,
     async fn() {
@@ -42,18 +44,27 @@ Deno.test({
 
         if (!appId || !keyPath) return
 
+        const controller = new AbortController()
         try {
             const privateKey = await Deno.readTextFile(keyPath)
-            new App({ appId, privateKey })
+            new App({
+                appId,
+                privateKey,
+                Octokit: Octokit.defaults({
+                    request: { signal: controller.signal },
+                }),
+            })
         } catch (e) {
             assert(false, `Failed to initialize GitHub App: ${e}`)
+        } finally {
+            controller.abort()
         }
     },
 })
 
 Deno.test('Configuration - cache file writability', async () => {
-    const __dirname = new URL('.', import.meta.url).pathname
-    const cachePath = join(__dirname, '.cache.json')
+    const tempDir = await Deno.makeTempDir()
+    const cachePath = join(tempDir, '.cache.json')
     try {
         const testData = { data: 'test', expiresAt: new Date(Date.now() + 10000).toISOString() }
         await Deno.writeTextFile(cachePath, JSON.stringify(testData, null, 2))
@@ -61,5 +72,7 @@ Deno.test('Configuration - cache file writability', async () => {
         assert(JSON.parse(content).data === 'test', 'Failed to read back test cache data')
     } catch (e) {
         assert(false, `Cache file at ${cachePath} is not writable: ${e}`)
+    } finally {
+        await Deno.remove(tempDir, { recursive: true })
     }
 })
