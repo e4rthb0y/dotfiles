@@ -1,0 +1,6 @@
+[submodule "nvim"]
+	path = nvim
+	url = https://github.com/e4rthb0y/nvim
+[submodule ".gemini/skills"]
+	path = .gemini/skills
+	url = https://github.com/e4rthb0y/skills
