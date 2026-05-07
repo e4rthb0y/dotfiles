@@ -47,7 +47,6 @@ export async function run(cacheProvider?: ICacheProvider<AuthData>) {
             installation_id: Number(INSTALLATION_ID),
         })
 
-        // Fetch the App's information to get its slug and ID
         const { data: appInfo } = await app.octokit.rest.apps.getAuthenticated()
 
         if (!appInfo) throw new Error('Failed to fetch GitHub App information')

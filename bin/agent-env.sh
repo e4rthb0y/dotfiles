@@ -2,7 +2,6 @@
 
 # This script should be sourced: source bin/agent-env.sh
 
-# Resolve the physical path of this script to handle symlinks correctly
 REAL_PATH=$(readlink -f "${BASH_SOURCE[0]}")
 SCRIPT_DIR=$(cd "$(dirname "$REAL_PATH")" && pwd)
 DOTFILES_DIR=$(cd "$SCRIPT_DIR/.." && pwd)
@@ -13,13 +12,11 @@ if [ ! -f "$AUTH_SCRIPT" ]; then
     [[ "${BASH_SOURCE[0]}" == "${0}" ]] && exit 1 || return 1
 fi
 
-# Get Auth Data in JSON format
 if ! AUTH_JSON=$("$AUTH_SCRIPT") || [ -z "$AUTH_JSON" ]; then
     echo "Error: Failed to obtain GitHub authentication data." >&2
     [[ "${BASH_SOURCE[0]}" == "${0}" ]] && exit 1 || return 1
 fi
 
-# Parse JSON using jq
 GITHUB_TOKEN=$(echo "$AUTH_JSON" | jq -r '.token')
 GIT_AUTHOR_NAME=$(echo "$AUTH_JSON" | jq -r '.name')
 GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
@@ -32,13 +29,9 @@ export GIT_COMMITTER_NAME
 export GIT_AUTHOR_EMAIL
 export GIT_COMMITTER_EMAIL
 
-# Configure git to use GitHub CLI as a credential helper if gh is available
 if command -v gh >/dev/null 2>&1; then
-    # gh auth setup-git requires an interactive session or specific config
-    # We set GITHUB_TOKEN which gh CLI respects
     export GH_TOKEN="$GITHUB_TOKEN"
     
-    # Set local git config for the session
     git config user.name "$GIT_AUTHOR_NAME"
     git config user.email "$GIT_AUTHOR_EMAIL"
     
