@@ -13,7 +13,7 @@ source ~/.agent-env.sh
 This script automatically:
 1. Authenticates using the workspace's GitHub App.
 2. Exports `GITHUB_TOKEN` and `GH_TOKEN`.
-3. Configures your Git identity (`user.name`, `user.email`) to match the authenticated bot.
+3. Configures the workspace's Git identity (`user.name`, `user.email`) to match the authenticated bot.
 
 ### Skills & Workflows
 Refer to `.gemini/skills/github/SKILL.md` for detailed instructions on:
