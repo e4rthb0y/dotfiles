@@ -136,3 +136,9 @@ esac
 # Deno
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+
+# opencode
+export PATH=/home/augusto/.opencode/bin:$PATH
+
+# Added by Antigravity CLI installer
+export PATH="/home/augusto/.local/bin:$PATH"
