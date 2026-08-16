@@ -43,16 +43,6 @@ context.dev.read=project:Dev
 context.dev.write=project:Dev
 context.client.read=project:Client
 context.client.write=project:Client
-context.kate.read=project:Client.Kate.Webflow
-context.kate.write=project:Client.Kate.Webflow
-context.daniel.read=project:Client.Daniel.Webflow
-context.daniel.write=project:Client.Daniel.Webflow
-context.rec.read=project:Client.RecNetworking
-context.rec.write=project:Client.RecNetworking
-context.rec-marketing.read=project:Client.RecNetworking.Marketing
-context.rec-marketing.write=project:Client.RecNetworking.Marketing
-context.rec-branding.read=project:Client.RecNetworking.Branding
-context.rec-branding.write=project:Client.RecNetworking.Branding
 
 # --- 5. INTEGRATIONS (TIMEW & THEME) ------------------------------------------
 
